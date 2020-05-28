@@ -27,6 +27,7 @@ L.control.layers(null, baseMaps, {
 	position: 'topleft'
 }).addTo(map)
 
+var currentLocation = {}
 
 function usePosition(e) {
 	//L.marker(e.latlng).addTo(map)
@@ -60,3 +61,20 @@ function usePosition(e) {
 if (navigator.geolocation) {
 	navigator.geolocation.watchPosition(usePosition)
 }
+
+var goToPositionButton = L.Control.extend({
+	options: {
+		position: 'topright'
+	},
+	onAdd: function(map) {
+		//<button id="add-button" type="button" class="btn btn-secondary btn-sm"><span class="fa fa-location-arrow"></span></button>
+		var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom btn btn-secondary btn-sm');
+		container.appendChild(L.DomUtil.create('span', 'fa fa-location-arrow'))
+		container.onclick = function() {
+			map.panTo(currentLocation.dot._latlng)
+		}
+		return container;
+	}
+});
+
+map.addControl(new goToPositionButton());
