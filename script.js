@@ -19,10 +19,44 @@ var baseMaps = {
 var map = L.map('themap', {
 	//center: [59.3274541, 18.0543566],
 	//zoom: 13,
-	layers: [baseMaps['StamenToner']],
+	layers: [baseMaps['Satellit']],
 	zoomControl: false,
 }).setView([18.505, 50.09], 13);
 
 L.control.layers(null, baseMaps, {
 	position: 'topleft'
 }).addTo(map)
+
+
+function usePosition(e) {
+	//L.marker(e.latlng).addTo(map)
+	//	.bindPopup("You are within " + radius + " meters from this point").openPopup();
+	e.latlng = [e.coords.latitude, e.coords.longitude];
+
+	if (currentLocation.dot) {
+		map.removeLayer(currentLocation.dot)
+		map.removeLayer(currentLocation.circle)
+	}
+	currentLocation.dot = L.circle(e.latlng, {
+		radius: e.coords.accuracy / 2,
+		fillColor: colors.blue100,
+		color: colors.blue100,
+		weight: .5,
+		opacity: 1,
+		fillOpacity: 0.05
+	}).addTo(map);
+
+	currentLocation.circle = L.circle(e.latlng, {
+		radius: 1,
+		fillColor: colors.blue100,
+		color: colors.blue100,
+		weight: 4,
+		opacity: 1,
+		fillOpacity: 0.8
+	}).addTo(map);
+
+}
+
+if (navigator.geolocation) {
+	navigator.geolocation.watchPosition(usePosition)
+}
