@@ -22,3 +22,7 @@ var map = L.map('themap', {
 	layers: [baseMaps['StamenToner']],
 	zoomControl: false,
 }).setView([18.505, 50.09], 13);
+
+L.control.layers(null, baseMaps, {
+	position: 'topleft'
+}).addTo(map)
