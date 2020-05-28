@@ -15,9 +15,9 @@ var baseMaps = {
 	"Mörk": L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVycmthcmxzb24iLCJhIjoiY2p1MW9td3ZpMDNrazQ0cGVmMDltc3EwaSJ9.0h6iBb8t7laIu-xP7YE4CQ'),
 }
 
-var map = L.map('map', {
+var map = L.map('themap', {
 	//center: [59.3274541, 18.0543566],
 	//zoom: 13,
-	layers: [baseMaps['Normal']],
+	layers: [baseMaps['Ljus']],
 	zoomControl: false,
 }).setView([18.505, 50.09], 13);
