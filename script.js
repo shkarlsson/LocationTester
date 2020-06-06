@@ -40,6 +40,12 @@ var baseMaps = {
 	"StamenToner": L.tileLayer('http://a.tile.stamen.com/toner/${z}/${x}/${y}.png')
 }
 
+var lastPositions = {
+	'x':[],
+	'y':[],
+	'acc':[]
+}
+
 var map = L.map('themap', {
 	//center: [59.3274541, 18.0543566],
 	//zoom: 13,
